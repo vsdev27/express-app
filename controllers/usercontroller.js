@@ -1,9 +1,9 @@
-const usermodel = require("../model/usermodel")
+const userModel = require("../model/usermodel");
 
 exports.getAllUsers=async(req,res)=>{
     try{
        
-        let data= await usermodel.find();
+        let data= await userModel.find();
 
          res.status(200).send(data)
     }
@@ -11,13 +11,26 @@ exports.getAllUsers=async(req,res)=>{
 
     }
 }
-
-exports.createUser=async(req,res)=>{
+module.exports.createUser=async(req,res)=>{
     try{
         
         let data=req.body;
+        let {name}= req.body;
+        let file= req.file;
 
-        let create = await usermodel.create(req.body);
+        console.log("re",file)
+
+
+        let filepath= 'http://localhost:3000/' +file.path 
+        console.log("re",filepath)
+
+        let find= await userModel.findOne({name});
+
+        if(find){
+            return res.status(400).json({ message: 'Username already exists' });
+        }
+
+        let create = await userModel.create(req.body);
 
         res.status(200).send(create)
 
@@ -33,7 +46,7 @@ exports.getUserById=async(req,res)=>{
         
         let id= req.params.id;
 
-        let data = await usermodel.findById(id);
+        let data = await userModel.findById(id);
 
         res.status(200).send(data)
 
@@ -50,7 +63,7 @@ exports.updateUser=async(req,res)=>{
 
         let id= req.params.id;
 
-        let data = await usermodel.findByIdAndUpdate(id,req.body);
+        let data = await userModel.findByIdAndUpdate(id,req.body);
 
         res.status(200).send(data)
 

@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const userRoutes=require('./routes/useroute');
 const { default: mongoose } = require('mongoose');
@@ -13,6 +14,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 // Routes

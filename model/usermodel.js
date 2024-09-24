@@ -9,4 +9,5 @@ const userSchema = new mongoose.Schema({
   password: String, 
   phone_number: Number,
 });
-module.exports = mongoose.model("user", userSchema);
+const userModel= mongoose.model("user", userSchema);
+module.exports=userModel
