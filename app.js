@@ -23,7 +23,7 @@ app.use('/users', userRoutes);
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("conenctsed")
 }).catch((err)=>{
-    console.log("err in connection",err)
+    console.log("err in ",err)
 })
     
 
